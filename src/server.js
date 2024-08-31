@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const dbInit = require('./dbInit.js')
 const formRoutes = require('./routes/formRoutes.js');
+const path = require('path')
 
 const app = express();
 
@@ -11,6 +12,7 @@ dbInit();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
+app.use('/assets', express.static(path.join(__dirname, '..', 'assets')));
 app.use('/', formRoutes);
 
 

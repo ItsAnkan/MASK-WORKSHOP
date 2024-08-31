@@ -10,7 +10,7 @@ async function addTodo() {
 	const text = document.getElementById('input').value;
 	if (text === '') return alert('No text given');
 	document.getElementById('input').value = '';
-	const res = await fetch('http://10.102.44.131:6969/create-task', {
+	const res = await fetch('http://localhost:6969/create-task', {
 		method : 'POST',
 		headers: {
 			"Content-Type": "application/json",
@@ -24,7 +24,7 @@ async function addTodo() {
 }
 
 async function toggleTodo(id) {
-	const res = await fetch('http://10.102.44.131:6969/update-task', {
+	const res = await fetch('http://localhost:6969/update-task', {
 		method : 'POST',
 		headers: {
 			"Content-Type": "application/json",
@@ -38,7 +38,7 @@ async function toggleTodo(id) {
 }
 
 async function deleteTodo(id) {
-	const res = await fetch('http://10.102.44.131:6969/delete-task', {
+	const res = await fetch('http://localhost:6969/delete-task', {
 		method : 'POST',
 		headers: {
 			"Content-Type": "application/json",
@@ -64,8 +64,8 @@ function render() {
 		item.innerHTML = `
 			<p>${todo.text}</p>
 			<div class="buttons">
-				<button onclick="toggleTodo('${todo._id}')"><img src="${todo.checked ? "checked" : "check"}.png" alt="Mark as Checked" width="30px"></button>
-				<button onclick="deleteTodo('${todo._id}')"><img src="delete.png" alt="Delete" width="30px"></button>
+				<button onclick="toggleTodo('${todo._id}')"><img src="/assets/img/${todo.checked ? "checked" : "check"}.png" alt="Mark as Checked" width="30px"></button>
+				<button onclick="deleteTodo('${todo._id}')"><img src="/assets/img/delete.png" alt="Delete" width="30px"></button>
 			</div>
 		`;
 		container.appendChild(item);
@@ -73,7 +73,7 @@ function render() {
 }
 
 const getTasks = async () => {
-	const todoData = await fetch('http://10.102.44.131:6969/get-tasks', {
+	const todoData = await fetch('http://localhost:6969/get-tasks', {
 		method : 'GET',
 	});
 
